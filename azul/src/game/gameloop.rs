@@ -1,3 +1,8 @@
+use std::collections::HashMap;
+
+use crate::game::tiles::*;
+
+
 pub struct GameState {
     pub player_count: i32,
 
@@ -13,12 +18,12 @@ impl Default for GameState {
             player_count: 0,
             current_round: 0,
             current_player_turn: 0,
-            tile_bag: HashMap.from([
-                (BLUE, 20),
-                (YELLOW, 20),
-                (RED, 20),
-                (BLACK, 20),
-                (WHITE, 20)
+            tile_bag: HashMap::from([
+                (Tile::BLUE, 20),
+                (Tile::YELLOW, 20),
+                (Tile::RED, 20),
+                (Tile::BLACK, 20),
+                (Tile::WHITE, 20)
             ])
         }
     }

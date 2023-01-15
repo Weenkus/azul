@@ -1,6 +1,9 @@
 use std::cmp;
 use std::option;
 
+use crate::game::tiles::*;
+
+
 struct  Player {
     floor_position: i32,
     rows: Vec<PatternRow>,
@@ -20,17 +23,17 @@ fn reset_row() {
 
 }
 
-fn resolve_turn_patterns(player: &mut Player) {
-    for player in &row {
-        if row.size == row.capacity {
-            // Move to wall
-        } else {
-            // Reset the pattern row
-            row.size = 0;
-            row.tile = None;
-        }
-    }
-}
+// fn resolve_turn_patterns(player: &mut Player) {
+//     for player in &row {
+//         if row.size == row.capacity {
+//             // Move to wall
+//         } else {
+//             // Reset the pattern row
+//             row.size = 0;
+//             row.tile = None;
+//         }
+//     }
+// }
 
 // fn addRowTiles(player: Player, tile: Tile, num_tiles: u8, target_row: u8) {
 //     w

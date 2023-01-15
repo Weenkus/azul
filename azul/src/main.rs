@@ -1,5 +1,5 @@
-mod gameloop;
-use crate::gameloop::*;
+mod game;
+use crate::game::gameloop::*;
 
 fn main() {
     println!("Welcome to most generic Azul implementation");
