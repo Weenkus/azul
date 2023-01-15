@@ -14,8 +14,10 @@ impl Default for GameState {
     }
 }
 
-pub fn setup_game(game_state: &GameState) {
+pub fn setup_game(game_state: &mut GameState) {
     println!("Setting up game");
+
+    game_state.player_count = 2;
 }
 
 pub fn end_game(game_state: &GameState) {
@@ -30,8 +32,12 @@ pub fn end_round(game_state: &GameState) {
     println!("Ending round");
 }
 
-pub fn is_game_finished(game_state: &GameState) -> bool {
-    game_state.current_round < 2
+pub fn is_game_end(game_state: &GameState) -> bool {
+    game_state.current_round >= 2
+}
+
+pub fn is_round_end(game_state: &GameState) -> bool {
+    game_state.current_player_turn >= 1
 }
 
 pub fn update_ui(game_state: &GameState) {
