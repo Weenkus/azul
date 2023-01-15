@@ -3,6 +3,9 @@ pub struct GameState {
 
     pub current_round: i32,
     pub current_player_turn: i32,
+
+    pub tile_bag: HashMap<Tile, i32>,
+
 }
 impl Default for GameState {
     fn default() -> Self {
@@ -10,6 +13,13 @@ impl Default for GameState {
             player_count: 0,
             current_round: 0,
             current_player_turn: 0,
+            tile_bag: HashMap.from([
+                (BLUE, 20),
+                (YELLOW, 20),
+                (RED, 20),
+                (BLACK, 20),
+                (WHITE, 20)
+            ])
         }
     }
 }
