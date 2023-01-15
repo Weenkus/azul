@@ -55,7 +55,3 @@ fn add_player_floor_tiles(player: &mut Player, num_tiles: i32) {
 }
 
 // let v = vec![100, 32, 57]; for i in &v { println!("i") }  
-
-fn main() {
-    println!("Hi Azul Players!")
-}
