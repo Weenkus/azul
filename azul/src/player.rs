@@ -1,6 +1,7 @@
 use std::cmp;
+use std::option;
 
-struct Player {
+struct  Player {
     floor_position: i32,
     rows: Vec<PatternRow>,
     wall: Wall,
@@ -12,15 +13,23 @@ const MAX_NUM_ROWS: i32 = 5;
 struct PatternRow {
     capacity: i32,
     size: i32,
-    tile: Tile,
+    tile: Option<Tile>,
 }
 
-enum Tile {
-    BLUE,
-    YELLOW,
-    RED,
-    BLACK,
-    WHITE,
+fn reset_row() {
+
+}
+
+fn resolve_turn_patterns(player: &mut Player) {
+    for player in &row {
+        if row.size == row.capacity {
+            // Move to wall
+        } else {
+            // Reset the pattern row
+            row.size = 0;
+            row.tile = None;
+        }
+    }
 }
 
 // fn addRowTiles(player: Player, tile: Tile, num_tiles: u8, target_row: u8) {
@@ -53,5 +62,3 @@ fn get_player_floor_score(player: Player) {
 fn add_player_floor_tiles(player: &mut Player, num_tiles: i32) {
     player.floor_position += num_tiles;
 }
-
-// let v = vec![100, 32, 57]; for i in &v { println!("i") }  
