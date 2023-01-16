@@ -8,7 +8,7 @@ impl Default for FactoryFloor {
     fn default() -> Self {
         Self {
             displays: Vec::new(),
-            center: TileBag::default();
+            center: TileBag::default()
         }
     }
 }
