@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use rand::prelude::*;
 
 #[derive(Hash, Eq, PartialEq, Debug)]
 pub enum Tile {
@@ -36,5 +37,13 @@ impl TileBag {
                 (Tile::WHITE, 20),
             ])
         }
+    }
+
+    pub fn append(mut self, bag: TileBag) {
+
+    }
+
+    pub fn take_random_n(mut self) -> TileBag {
+        TileBag::default()
     }
 }
