@@ -6,3 +6,4 @@ vscode:
     - pkief.material-icon-theme
     - github.vscode-pull-request-github
     - eamodio.gitlens
+    - rust-lang.rust-analyzer
