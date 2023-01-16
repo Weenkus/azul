@@ -15,7 +15,13 @@ pub struct TileBag {
 impl Default for TileBag {
     fn default() -> Self {
         Self {
-            counts: HashMap::default()
+            counts: HashMap::from([
+                (Tile::BLUE, 0),
+                (Tile::YELLOW, 0),
+                (Tile::RED, 0),
+                (Tile::BLACK, 0),
+                (Tile::WHITE, 0),
+            ])
         }
     }
 }
