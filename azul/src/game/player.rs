@@ -1,7 +1,5 @@
-mod tiles;
-use crate::tiles::*;
-
 use crate::game::tiles::*;
+use std::cmp;
 
 
 struct  Player {
@@ -22,7 +20,7 @@ fn is_valid_row_placement(player: &mut Player, row: &PatternRow, row_index: usiz
             if current_tile == tile {
                 return true;
             }
-        }
+        },
         // Check that an empty row can accept the tile
         // (has the tile empty on the wall)
         None => {
@@ -30,7 +28,7 @@ fn is_valid_row_placement(player: &mut Player, row: &PatternRow, row_index: usiz
             if !player.wall[row_index][j] {
                 return true;
             }
-        }
+        },
     }
 
     return false;
@@ -38,7 +36,7 @@ fn is_valid_row_placement(player: &mut Player, row: &PatternRow, row_index: usiz
 
 
 fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, target_row: usize) {
-    assert!(num_tiles > 0, format!("num_tiles should be positive {}", num_tiles));
+    assert!(num_tiles > 0, "num_tiles should be positive {}", num_tiles);
 
     let mut valid_action_exists = false;
     for (i, row) in (&player.rows).iter().enumerate() {
@@ -58,6 +56,7 @@ fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, target_r
 
 const MAX_NUM_ROWS: i32 = 5;
 
+#[derive(Clone)]
 struct PatternRow {
     capacity: i32,
     size: i32,
@@ -87,7 +86,7 @@ fn add_row_tiles(player: &mut Player, tile: Tile, num_tiles: i32, target_row: us
 }
 
 fn resolve_turn_patterns(player: &mut Player) {
-    for (i, row) in (&player.rows).iter_mut().enumerate() {
+    for (i, row) in player.rows.iter_mut().enumerate() {
         if row.size == row.capacity {
             match row.tile {
                 // Move to wall

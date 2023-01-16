@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-#[derive(Hash, Eq, PartialEq, Debug)]
+#[derive(Hash, Eq, PartialEq, Debug, Clone)]
 pub enum Tile {
     BLUE,
     YELLOW,
