@@ -39,12 +39,32 @@ impl TileBag {
         }
     }
 
+    pub fn total_tiles_count(&self) -> i32 {
+        (&self.counts).iter().map(|(k, v)| v).sum()
+    }
+
     pub fn append(mut self, bag: TileBag) {
 
     }
 
-    pub fn take_random_n(mut self) -> TileBag {
-        TileBag::default()
+    pub fn take_random_n(mut self, n: i32) -> TileBag {
+        let mut selection_bag = TileBag::default();
+        
+        for i in (0..n) {
+            let random_number: f64 = rand::thread_rng().gen();
+            let mut pick_index =  (((&self).total_tiles_count() as f64) * random_number) as i32;
+             
+            // TODO: Continue the algorithme to pick here
+            // for (tile, count) in &self.counts {
+            //     if count <= &pick_index {
+            //         pick_index -= count;
+            //     } else {
+                    
+            //     }
+            // }
+        }
+
+        selection_bag
     }
 }
 
