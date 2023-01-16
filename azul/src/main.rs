@@ -18,7 +18,7 @@ fn main() {
             game_state.current_player_turn = (game_state.current_player_turn + 1) % game_state.player_count;
         }
         
-        end_round(&game_state);
+        end_round(&mut game_state);
         game_state.current_round += 1;
     }
     end_game(&game_state);

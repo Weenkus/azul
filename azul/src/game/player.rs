@@ -3,7 +3,7 @@ use std::cmp;
 
 
 pub struct  Player {
-    floor_position: i32,
+    floor_position: usize,
     rows: Vec<PatternRow>,
     wall: Vec<Vec<bool>>,
     score: i32,
@@ -56,7 +56,7 @@ pub fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, targ
     // TODO return overflow tiles, remove if
     if !valid_action_exists {
         // Overflow - sadge
-        player.floor_position += num_tiles;
+        player.floor_position += num_tiles as usize;
     } else {
         // Execute the placement
         add_row_tiles(player, tile, num_tiles, target_row);
@@ -89,7 +89,7 @@ fn add_row_tiles(player: &mut Player, tile: Tile, num_tiles: i32, target_row: us
     // Check for row overflow
     let overflow = row.capacity - temp_size;
     if overflow > 0 {
-        player.floor_position += overflow;
+        player.floor_position += overflow as usize;
     }
 
     // Rest the overflow
@@ -137,10 +137,24 @@ fn wall_row_tile_index(tile: Tile, num_row: usize) -> usize {
 const FLOOR_MAX_PENTALY: i32 = -14;
 const FLOOR_SCORES: [i32; 8] = [0, -1, -2, -4, -6, -8, -11, -14];
 
-fn get_player_floor_score(player: Player) {
-    cmp::min(FLOOR_SCORES[player.floor_position as usize], FLOOR_MAX_PENTALY);
+fn get_player_floor_score(floor_position: usize) -> i32 {
+    cmp::min(FLOOR_SCORES[floor_position as usize], FLOOR_MAX_PENTALY)
 }
 
 fn add_player_floor_tiles(player: &mut Player, num_tiles: i32) {
-    player.floor_position += num_tiles;
+    player.floor_position += num_tiles as usize;
+}
+
+pub fn clear_rows(player: &mut Player) {
+    // Count the rows to overflow
+    let overflow: usize = player.rows.iter()
+        .map(|f| f.size as usize)
+        .sum();
+
+    player.floor_position += overflow;
+    player.score += get_player_floor_score(player.floor_position) as i32;
+
+    // Clean the rows
+    player.rows.iter_mut()
+        .for_each(reset_row);
 }

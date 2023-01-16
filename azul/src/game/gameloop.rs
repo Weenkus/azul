@@ -43,10 +43,12 @@ pub fn setup_round(game_state: &GameState) {
     println!("Setting up round");
 }
 
-pub fn end_round(game_state: &GameState) {
+pub fn end_round(game_state: &mut GameState) {
     println!("Ending round");
 
-
+    println!(" Clearning rows, filling floor, scoring");
+    game_state.players.iter_mut()
+        .for_each(clear_rows)
 }
 
 pub fn is_game_end(game_state: &GameState) -> bool {
