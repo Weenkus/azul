@@ -9,7 +9,7 @@ struct  Player {
     score: i32,
 }
 
-fn is_valid_row_placement(player: &mut Player, row: &PatternRow, row_index: usize, tile: Tile) -> bool {
+fn is_valid_row_placement(player: &Player, row: &PatternRow, row_index: usize, tile: Tile) -> bool {
     if row.size >= row.capacity {
         return false;
     }
@@ -39,7 +39,7 @@ fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, target_r
     assert!(num_tiles > 0, "num_tiles should be positive {}", num_tiles);
 
     let mut valid_action_exists = false;
-    for (i, row) in (&player.rows).iter().enumerate() {
+    for (i, row) in player.rows.iter().enumerate() {
         valid_action_exists = is_valid_row_placement(player, row, i, tile);
     }
 
@@ -56,7 +56,7 @@ fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, target_r
 
 const MAX_NUM_ROWS: i32 = 5;
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 struct PatternRow {
     capacity: i32,
     size: i32,
@@ -72,7 +72,7 @@ fn add_row_tiles(player: &mut Player, tile: Tile, num_tiles: i32, target_row: us
     // NOTE this assume this is already a valid action
 
     // Update the row
-    let row = player.rows[target_row];
+    let mut row = player.rows[target_row];
     let temp_size = row.size + num_tiles;
 
     // Check for row overflow
