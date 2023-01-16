@@ -2,11 +2,21 @@ use crate::game::tiles::*;
 use std::cmp;
 
 
-struct  Player {
+pub struct  Player {
     floor_position: i32,
     rows: Vec<PatternRow>,
     wall: Vec<Vec<bool>>,
     score: i32,
+}
+impl Default for Player {
+    fn default() -> Self {
+        Self {
+            floor_position: 0,
+            rows: Vec::new(),
+            wall: Vec::new(),
+            score: 0,
+        }
+    }
 }
 
 fn is_valid_row_placement(player: &Player, row: &PatternRow, row_index: usize, tile: Tile) -> bool {
@@ -35,7 +45,7 @@ fn is_valid_row_placement(player: &Player, row: &PatternRow, row_index: usize, t
 }
 
 
-fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, target_row: usize) {
+pub fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, target_row: usize) {
     assert!(num_tiles > 0, "num_tiles should be positive {}", num_tiles);
 
     let mut valid_action_exists = false;
@@ -54,8 +64,9 @@ fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, target_r
     }
 }
 
-const MAX_NUM_ROWS: i32 = 5;
+pub const MAX_NUM_ROWS: i32 = 5;
 
+// TODO(ivan) use hand bang instead
 #[derive(Clone, Copy)]
 struct PatternRow {
     capacity: i32,
