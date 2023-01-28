@@ -59,14 +59,9 @@ impl TileSet {
         let actual_n = cmp::min(n, self.total_tiles_count());
 
         for i in 0..actual_n {
-            println!("   Take i={}", i);
-
             let random_number: f64 = rand::thread_rng().gen();
-            println!("   Take random_number={}", random_number);
 
             let mut pick_index = ((self.total_tiles_count() as f64) * random_number) as i32;
-                
-            println!("   Take pick_index={}", pick_index);
 
             let mut pick_tile = Tile::BLACK;
             for (tile, count) in &self.counts {
@@ -81,9 +76,6 @@ impl TileSet {
             self.counts.insert(pick_tile, self.counts[&pick_tile] - 1);
             selection_bag.counts.insert(pick_tile, selection_bag.counts[&pick_tile] + 1);
         }
-
-        println!("   Take self={:?}", self.counts);
-        println!("   Take new={:?}", selection_bag.counts);
 
         selection_bag
     }

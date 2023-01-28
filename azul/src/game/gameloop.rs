@@ -50,10 +50,13 @@ pub fn end_round(game_state: &mut GameState) {
 
     println!("Clearning rows, filling floor, scoring");
     game_state.players.iter_mut()
-        .for_each(clear_rows)
+        .for_each(clear_rows);
+
+    assert!(game_state.factory_floor.is_empty());
 }
 
 pub fn is_game_end(game_state: &GameState) -> bool {
+    assert!(game_state.current_round != 0);
     // game_state.players.iter()
     //    .any(|player| player.any_row_complete())
 
