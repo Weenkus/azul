@@ -28,7 +28,7 @@ impl Default for GameState {
     }
 }
 
-pub fn setup_game(game_state: &mut GameState) {
+pub fn set_up_game(game_state: &mut GameState) {
     println!("Setting up game");
 
     game_state.player_count = 2;
@@ -39,14 +39,14 @@ pub fn end_game(game_state: &GameState) {
     println!("Ending game");
 }
 
-pub fn setup_round(game_state: &GameState) {
+pub fn set_up_round(game_state: &GameState) {
     println!("Setting up round");
 }
 
 pub fn end_round(game_state: &mut GameState) {
     println!("Ending round");
 
-    println!(" Clearning rows, filling floor, scoring");
+    println!("Clearning rows, filling floor, scoring");
     game_state.players.iter_mut()
         .for_each(clear_rows)
 }
