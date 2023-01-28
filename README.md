@@ -1,6 +1,6 @@
-# Cascadia
+# Azul
 
-Implementation of the Cascadia board game as an environment for training RL agents.
+Implementation of the Azul board game as an environment for training RL agents.
 
 ## Development
 
