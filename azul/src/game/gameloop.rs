@@ -39,8 +39,10 @@ pub fn end_game(game_state: &GameState) {
     println!("Ending game");
 }
 
-pub fn set_up_round(game_state: &GameState) {
+pub fn set_up_round(game_state: &mut GameState) {
     println!("Setting up round");
+
+    game_state.tile_bag.take_random_n(3);
 }
 
 pub fn end_round(game_state: &mut GameState) {
@@ -52,12 +54,16 @@ pub fn end_round(game_state: &mut GameState) {
 }
 
 pub fn is_game_end(game_state: &GameState) -> bool {
-    game_state.players.iter()
-        .any(|player| player.any_row_complete())
+    // game_state.players.iter()
+    //    .any(|player| player.any_row_complete())
+
+    game_state.current_round >= 2
 }
 
 pub fn is_round_end(game_state: &GameState) -> bool {
-    game_state.factory_floor.is_empty()
+    // game_state.factory_floor.is_empty()
+
+    game_state.current_player_turn >= 1
 }
 
 pub fn update_ui(game_state: &GameState) {

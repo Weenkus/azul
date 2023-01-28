@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use rand::prelude::*;
+use std::cmp;
 
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub enum Tile {
@@ -51,29 +52,40 @@ impl TileSet {
 
     }
 
-    pub fn take_random_n(mut self, n: i32) -> TileSet {
+    pub fn take_random_n(&mut self, n: i32) -> TileSet {
         let mut selection_bag = TileSet::default();
-        
-        for i in 0..n {
+        let actual_n = cmp::min(n, self.total_tiles_count());
+
+        for i in 0..actual_n {
             println!("   Take i={}", i);
 
             let random_number: f64 = rand::thread_rng().gen();
-            let mut pick_index =  (((&self).total_tiles_count() as f64) * random_number) as i32;
-             
+            println!("   Take random_number={}", random_number);
+
+            let mut pick_index = ((self.total_tiles_count() as f64) * random_number) as i32;
+                
             println!("   Take pick_index={}", pick_index);
 
-            // TODO: Continue the algorithme to pick here
-            // for (tile, count) in &self.counts {
-            //     if count <= &pick_index {
-            //         pick_index -= count;
-            //     } else {
-                    
-            //     }
-            // }
+            let mut pick_tile = Tile::BLACK;
+            for (tile, count) in &self.counts {
+                if *count < pick_index {
+                    pick_index -= *count
+                } else if *count > 0 {
+                    pick_tile = tile.clone();
+                    break;
+                }
+            }
+
+            self.counts.insert(pick_tile, self.counts[&pick_tile] - 1);
+            selection_bag.counts.insert(pick_tile, selection_bag.counts[&pick_tile] + 1);
         }
+
+        println!("   Take self={:?}", self.counts);
+        println!("   Take new={:?}", selection_bag.counts);
 
         selection_bag
     }
+
 }
 
 pub fn tile_index(tile: Tile) -> usize {

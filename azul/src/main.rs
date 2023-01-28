@@ -9,7 +9,7 @@ fn main() {
     set_up_game(&mut game_state);
 
     while !is_game_end(&game_state) {
-        set_up_round(&game_state);
+        set_up_round(&mut game_state);
 
         while !is_round_end(&game_state) {
             take_turn(&mut game_state);
