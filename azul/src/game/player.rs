@@ -4,10 +4,10 @@ use std::cmp;
 
 #[derive(Debug)]
 pub struct  Player {
-    floor_position: usize,
-    rows: Vec<PatternRow>,
-    wall: Vec<Vec<bool>>,
-    score: i32,
+    pub floor_position: usize,
+    pub rows: Vec<PatternRow>,
+    pub wall: Vec<Vec<bool>>,
+    pub score: i32,
 }
 impl Default for Player {
     fn default() -> Self {
@@ -76,10 +76,10 @@ pub const MAX_NUM_ROWS: i32 = 5;
 
 // TODO(ivan) use hand bang instead
 #[derive(Clone, Copy, Debug)]
-struct PatternRow {
-    capacity: i32,
-    size: i32,
-    tile: Option<Tile>,
+pub struct PatternRow {
+    pub capacity: i32,
+    pub size: i32,
+    pub tile: Option<Tile>,
 }
 
 fn reset_row(row: &mut PatternRow) {

@@ -37,6 +37,9 @@ pub fn set_up_game(game_state: &mut GameState) {
 
 pub fn end_game(game_state: &GameState) {
     println!("Ending game");
+    for (i, player) in game_state.players.iter().enumerate() {
+        println!(" P{}: score {}", i, player.score);
+    }
 }
 
 pub fn set_up_round(game_state: &mut GameState) {
@@ -48,15 +51,15 @@ pub fn set_up_round(game_state: &mut GameState) {
 pub fn end_round(game_state: &mut GameState) {
     println!("Ending round");
 
-    println!("Clearning rows, filling floor, scoring");
+    println!(" Clearning rows, filling floor, scoring");
     game_state.players.iter_mut()
         .for_each(clear_rows);
 
-    assert!(game_state.factory_floor.is_empty());
+    game_state.current_round += 1;
+    //assert!(game_state.factory_floor.is_empty());
 }
 
 pub fn is_game_end(game_state: &GameState) -> bool {
-    assert!(game_state.current_round != 0);
     // game_state.players.iter()
     //    .any(|player| player.any_row_complete())
 
@@ -75,7 +78,7 @@ pub fn update_ui(game_state: &GameState) {
 }
 
 pub fn take_turn(game_state: &mut GameState) {
-    println!("Player {} turn", game_state.current_player_turn);
+    println!(" P{} turn", game_state.current_player_turn);
 
     let mut current_player = &mut game_state.players[game_state.current_player_turn];
 
