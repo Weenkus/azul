@@ -50,10 +50,14 @@ impl TileBag {
     pub fn take_random_n(mut self, n: i32) -> TileBag {
         let mut selection_bag = TileBag::default();
         
-        for i in (0..n) {
+        for i in 0..n {
+            println!("   Take i={}", i);
+
             let random_number: f64 = rand::thread_rng().gen();
             let mut pick_index =  (((&self).total_tiles_count() as f64) * random_number) as i32;
              
+            println!("   Take pick_index={}", pick_index);
+
             // TODO: Continue the algorithme to pick here
             // for (tile, count) in &self.counts {
             //     if count <= &pick_index {
