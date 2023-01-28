@@ -19,6 +19,13 @@ impl Default for Player {
     }
 }
 
+impl Player {
+    pub fn any_row_complete(&self) -> bool {
+        self.wall.iter()
+            .any(|row| row.iter().all(|e| *e))
+    }
+}
+
 fn is_valid_row_placement(player: &Player, row: &PatternRow, row_index: usize, tile: Tile) -> bool {
     if row.size >= row.capacity {
         return false;

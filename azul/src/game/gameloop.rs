@@ -52,7 +52,8 @@ pub fn end_round(game_state: &mut GameState) {
 }
 
 pub fn is_game_end(game_state: &GameState) -> bool {
-    game_state.current_round >= 2
+    game_state.players.iter()
+        .any(|player| player.any_row_complete())
 }
 
 pub fn is_round_end(game_state: &GameState) -> bool {
