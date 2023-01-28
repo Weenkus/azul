@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use rand::prelude::*;
 use std::cmp;
 
+
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub enum Tile {
     BLUE,
@@ -11,6 +12,7 @@ pub enum Tile {
     WHITE
 }
 
+#[derive(Debug)]
 pub struct TileSet {
     pub counts: HashMap<Tile, i32>
 }

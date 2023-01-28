@@ -2,6 +2,7 @@ use crate::game::tiles::*;
 use std::cmp;
 
 
+#[derive(Debug)]
 pub struct  Player {
     floor_position: usize,
     rows: Vec<PatternRow>,
@@ -74,7 +75,7 @@ pub fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, targ
 pub const MAX_NUM_ROWS: i32 = 5;
 
 // TODO(ivan) use hand bang instead
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 struct PatternRow {
     capacity: i32,
     size: i32,

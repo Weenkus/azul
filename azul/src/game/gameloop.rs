@@ -4,7 +4,7 @@ use crate::game::player::*;
 
 use rand::Rng;
 
-
+#[derive(Debug)]
 pub struct GameState {
     pub player_count: usize,
     pub tile_bag: TileSet,
@@ -41,7 +41,7 @@ pub fn end_game(game_state: &GameState) {
 
 pub fn set_up_round(game_state: &mut GameState) {
     println!("Setting up round");
-
+    game_state.factory_floor.refill(&mut game_state.tile_bag);
     game_state.tile_bag.take_random_n(3);
 }
 
@@ -68,6 +68,7 @@ pub fn is_round_end(game_state: &GameState) -> bool {
 
 pub fn update_ui(game_state: &GameState) {
     println!("Updating UI");
+    println!("Factory: {:?}", game_state.factory_floor)
 }
 
 pub fn take_turn(game_state: &mut GameState) {
