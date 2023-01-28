@@ -56,7 +56,7 @@ pub fn is_game_end(game_state: &GameState) -> bool {
 }
 
 pub fn is_round_end(game_state: &GameState) -> bool {
-    game_state.current_player_turn >= 1
+    game_state.factory_floor.is_empty()
 }
 
 pub fn update_ui(game_state: &GameState) {

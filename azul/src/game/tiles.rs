@@ -43,6 +43,10 @@ impl TileSet {
         (&self.counts).iter().map(|(k, v)| v).sum()
     }
 
+    pub fn is_empty(&self) -> bool {
+        self.total_tiles_count() == 0
+    }
+
     pub fn append(mut self, bag: TileSet) {
 
     }
