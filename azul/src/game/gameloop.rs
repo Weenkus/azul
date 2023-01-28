@@ -7,7 +7,7 @@ use rand::Rng;
 
 pub struct GameState {
     pub player_count: usize,
-    pub tile_bag: TileBag,
+    pub tile_bag: TileSet,
     pub factory_floor: FactoryFloor,
 
     pub current_round: usize,
@@ -21,7 +21,7 @@ impl Default for GameState {
             player_count: 0,
             current_round: 0,
             current_player_turn: 0,
-            tile_bag: TileBag::create_starting_bag(),
+            tile_bag: TileSet::create_starting_bag(),
             factory_floor: FactoryFloor::default(),
             players: vec![Player::default(), Player::default()]
         }
@@ -32,7 +32,7 @@ pub fn setup_game(game_state: &mut GameState) {
     println!("Setting up game");
 
     game_state.player_count = 2;
-    game_state.factory_floor.displays = (0..5).map(|i| TileBag::default()).collect();
+    game_state.factory_floor.displays = (0..5).map(|i| TileSet::default()).collect();
 }
 
 pub fn end_game(game_state: &GameState) {

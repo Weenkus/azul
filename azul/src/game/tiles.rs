@@ -10,10 +10,10 @@ pub enum Tile {
     WHITE
 }
 
-pub struct TileBag {
+pub struct TileSet {
     pub counts: HashMap<Tile, i32>
 }
-impl Default for TileBag {
+impl Default for TileSet {
     fn default() -> Self {
         Self {
             counts: HashMap::from([
@@ -26,7 +26,7 @@ impl Default for TileBag {
         }
     }
 }
-impl TileBag {
+impl TileSet {
     pub fn create_starting_bag() -> Self {
         Self {
             counts: HashMap::from([
@@ -43,12 +43,12 @@ impl TileBag {
         (&self.counts).iter().map(|(k, v)| v).sum()
     }
 
-    pub fn append(mut self, bag: TileBag) {
+    pub fn append(mut self, bag: TileSet) {
 
     }
 
-    pub fn take_random_n(mut self, n: i32) -> TileBag {
-        let mut selection_bag = TileBag::default();
+    pub fn take_random_n(mut self, n: i32) -> TileSet {
+        let mut selection_bag = TileSet::default();
         
         for i in 0..n {
             println!("   Take i={}", i);
