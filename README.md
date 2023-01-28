@@ -9,3 +9,11 @@ The easiest way to develop is to reuse all the setup created for running it in G
 1. Create an account in GitPod if you don't have one
 2. Create a [workspace](https://gitpod.io/workspaces) pointing to this repo
 3. The provisioned docker should have everything installed
+
+## How to run
+
+Run this frm the `azul` directory:
+
+```bash
+cargo run
+```
