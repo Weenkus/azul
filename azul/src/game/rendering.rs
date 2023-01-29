@@ -47,7 +47,7 @@ fn print_player_board(player: &Player) {
 
 pub fn print_player_boards(players: &Vec<Player>) {
     for (i, player) in players.iter().enumerate() {
-        println!("PLAYER #{}", i);
+        println!("PLAYER: #{} SCORE: {}", i, player.score);
         print_player_board(player);
         println!();
     }

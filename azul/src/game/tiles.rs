@@ -47,6 +47,13 @@ impl TileSet {
         }
     }
 
+    pub fn available_colors(&self) -> Vec<Tile> {
+        self.tiles.iter()
+            .filter(|(k, v)| **v > 0)
+            .map(|(k, v)| k.clone())
+            .collect()
+    }
+
     pub fn take_all_color(mut self, tile: Tile) -> TileSet {
 
         let color_set = TileSet {
