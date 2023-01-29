@@ -170,7 +170,11 @@ const FLOOR_MAX_PENTALY: i32 = -14;
 const FLOOR_SCORES: [i32; 8] = [0, -1, -2, -4, -6, -8, -11, -14];
 
 fn get_player_floor_score(floor_position: usize) -> i32 {
-    cmp::min(FLOOR_SCORES[floor_position as usize], FLOOR_MAX_PENTALY)
+    if floor_position < FLOOR_SCORES.len() {
+        FLOOR_SCORES[floor_position as usize]
+    } else {
+        FLOOR_MAX_PENTALY
+    }
 }
 
 fn add_player_floor_tiles(player: &mut Player, num_tiles: i32) {
