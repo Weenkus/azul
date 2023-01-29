@@ -140,7 +140,7 @@ fn resolve_turn_patterns(player: &mut Player) {
 
 ///
 
-const WALL_PATTERN: [[Tile; 5]; 5] = [
+pub const WALL_PATTERN: [[Tile; 5]; 5] = [
     [Tile::BLUE, Tile::YELLOW, Tile::RED, Tile::BLACK, Tile::WHITE],
     [Tile::WHITE, Tile::BLUE, Tile::YELLOW, Tile::RED, Tile::BLACK],
     [Tile::BLACK, Tile::WHITE, Tile::BLUE, Tile::YELLOW, Tile::RED],
