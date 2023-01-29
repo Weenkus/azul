@@ -2,7 +2,7 @@ use crate::game::tiles::*;
 use std::cmp;
 
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct  Player {
     pub floor_position: usize,
     pub rows: Vec<PatternRow>,
@@ -98,6 +98,12 @@ pub struct PatternRow {
     pub capacity: i32,
     pub size: i32,
     pub tile: Option<Tile>,
+}
+
+impl PatternRow {
+    pub fn is_empty(&self) -> bool {
+        self.size == self.capacity
+    }
 }
 
 fn reset_row(row: &mut PatternRow) {
