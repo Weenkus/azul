@@ -30,6 +30,11 @@ impl Default for TileSet {
     }
 }
 impl TileSet {
+    pub fn new(tile: Tile, count: i32) -> Self {
+        let mut tile_set: TileSet = Default::default();
+        tile_set.insert_tiles(tile, count);
+        tile_set
+    }
     pub fn create_starting_bag() -> Self {
         Self {
             counts: HashMap::from([
@@ -59,30 +64,22 @@ impl TileSet {
         self.total_tiles_count() == 0
     }
 
-    pub fn take_n_tiles(mut self, tile: Tile, count: i32) -> TileSet {
+    pub fn take_n_tiles(&mut self, tile: Tile, count: i32) -> TileSet {
+        let old = self.counts.get(&tile).unwrap().clone();
+        print!("{} {} {}", old, count, old - count);
+        self.counts.insert(tile, old - count);
+        TileSet::new(tile, count)
+    }
+
+    pub fn insert_tiles(&mut self, tile: Tile, count:i32) {
         self.counts.insert(tile, count);
-        let old = self.counts.get_mut(&tile);
-        match old {
-            Some(o2) => {
-                *o2 -= count;
-                Self {
-                    counts: HashMap::from([
-                        (tile, *o2),
-                    ])
-                }
-            } 
-            None => {
-                TileSet::default()
-            }
+    }
+
+    pub fn add(&mut self, other: TileSet) {
+        for (tile, o_n) in other.counts {
+            let s_n = self.counts.get(&tile).unwrap();
+            self.counts.insert(tile, o_n + s_n);
         }
-    }
-
-    pub fn insert_tiles(mut self, tile: Tile, count:i32) {
-        self.counts.insert(tile, count);
-    }
-
-    pub fn append(mut self, bag: TileSet) {
-
     }
 
     pub fn take_random_n(&mut self, n: i32) -> TileSet {
