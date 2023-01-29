@@ -12,7 +12,7 @@ pub enum Tile {
     WHITE
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct TileSet {
     pub counts: HashMap<Tile, i32>
 }
