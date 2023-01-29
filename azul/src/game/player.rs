@@ -72,6 +72,24 @@ pub fn execute_player_turn(player: &mut Player, tile: Tile, num_tiles: i32, targ
     }
 }
 
+pub fn player_take_tiles(player: &mut Player, tile: Tile, num_tiles: i32, target_row: usize) {
+
+    let mut valid_action_exists = false;
+    for (i, row) in player.rows.iter().enumerate() {
+        valid_action_exists = is_valid_row_placement(player, row, i, tile);
+    }
+
+    // TODO return overflow tiles, remove if
+    if !valid_action_exists {
+        // Overflow - sadge
+        player.floor_position += num_tiles as usize;
+    } else {
+        // Execute the placement
+        add_row_tiles(player, tile, num_tiles, target_row);
+        resolve_turn_patterns(player);
+    }
+}
+
 pub const MAX_NUM_ROWS: i32 = 5;
 
 // TODO(ivan) use hand bang instead
