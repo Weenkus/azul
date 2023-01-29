@@ -14,12 +14,12 @@ pub enum Tile {
 
 #[derive(Debug, Clone)]
 pub struct TileSet {
-    pub counts: HashMap<Tile, i32>
+    pub tiles: HashMap<Tile, i32>
 }
 impl Default for TileSet {
     fn default() -> Self {
         Self {
-            counts: HashMap::from([
+            tiles: HashMap::from([
                 (Tile::BLUE, 0),
                 (Tile::YELLOW, 0),
                 (Tile::RED, 0),
@@ -37,7 +37,7 @@ impl TileSet {
     }
     pub fn create_starting_bag() -> Self {
         Self {
-            counts: HashMap::from([
+            tiles: HashMap::from([
                 (Tile::BLUE, 20),
                 (Tile::YELLOW, 20),
                 (Tile::RED, 20),
@@ -50,14 +50,14 @@ impl TileSet {
     pub fn take_all_color(mut self, tile: Tile) -> TileSet {
 
         let color_set = TileSet {
-            counts: HashMap::from([(tile, self.counts[&tile])])
+            tiles: HashMap::from([(tile, self.tiles[&tile])])
         };
-        self.counts.insert(tile, 0);
+        self.tiles.insert(tile, 0);
         color_set
     }
 
     pub fn total_tiles_count(&self) -> i32 {
-        (&self.counts).iter().map(|(k, v)| v).sum()
+        (&self.tiles).iter().map(|(k, v)| v).sum()
     }
 
     pub fn is_empty(&self) -> bool {
@@ -65,20 +65,20 @@ impl TileSet {
     }
 
     pub fn take_n_tiles(&mut self, tile: Tile, count: i32) -> TileSet {
-        let old = self.counts.get(&tile).unwrap().clone();
+        let old = self.tiles.get(&tile).unwrap().clone();
         print!("{} {} {}", old, count, old - count);
-        self.counts.insert(tile, old - count);
+        self.tiles.insert(tile, old - count);
         TileSet::new(tile, count)
     }
 
     pub fn insert_tiles(&mut self, tile: Tile, count:i32) {
-        self.counts.insert(tile, count);
+        self.tiles.insert(tile, count);
     }
 
     pub fn add(&mut self, other: TileSet) {
-        for (tile, o_n) in other.counts {
-            let s_n = self.counts.get(&tile).unwrap();
-            self.counts.insert(tile, o_n + s_n);
+        for (tile, o_n) in other.tiles {
+            let s_n = self.tiles.get(&tile).unwrap();
+            self.tiles.insert(tile, o_n + s_n);
         }
     }
 
@@ -92,7 +92,7 @@ impl TileSet {
             let mut pick_index = ((self.total_tiles_count() as f64) * random_number) as i32;
 
             let mut pick_tile = Tile::BLACK;
-            for (tile, count) in &self.counts {
+            for (tile, count) in &self.tiles {
                 if *count < pick_index {
                     pick_index -= *count
                 } else if *count > 0 {
@@ -101,8 +101,8 @@ impl TileSet {
                 }
             }
 
-            self.counts.insert(pick_tile, self.counts[&pick_tile] - 1);
-            selection_bag.counts.insert(pick_tile, selection_bag.counts[&pick_tile] + 1);
+            self.tiles.insert(pick_tile, self.tiles[&pick_tile] - 1);
+            selection_bag.tiles.insert(pick_tile, selection_bag.tiles[&pick_tile] + 1);
         }
 
         selection_bag
