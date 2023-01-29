@@ -1,6 +1,7 @@
 use crate::game::tiles::*;
 use crate::game::factory::*;
 use crate::game::player::*;
+use crate::game::rendering::*;
 
 use rand::Rng;
 
@@ -74,13 +75,16 @@ pub fn is_round_end(game_state: &GameState) -> bool {
 
 pub fn update_ui(game_state: &GameState) {
     println!("Updating UI");
-    println!("Factory: {:?}", game_state.factory_floor)
+    println!("Factory: {:?}", game_state.factory_floor);
+    println!();
+
+    print_player_boards(&game_state.players);
 }
 
 pub fn take_turn(game_state: &mut GameState) {
     println!(" P{} turn", game_state.current_player_turn);
 
-    let mut current_player = &mut game_state.players[game_state.current_player_turn];
+    let current_player = &mut game_state.players[game_state.current_player_turn];
 
     // TODO(ivan) pick tiles
     let random_tile = Tile::BLACK;

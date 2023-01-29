@@ -58,7 +58,7 @@ impl TileSet {
         let mut selection_bag = TileSet::default();
         let actual_n = cmp::min(n, self.total_tiles_count());
 
-        for i in 0..actual_n {
+        for _i in 0..actual_n {
             let random_number: f64 = rand::thread_rng().gen();
 
             let mut pick_index = ((self.total_tiles_count() as f64) * random_number) as i32;
