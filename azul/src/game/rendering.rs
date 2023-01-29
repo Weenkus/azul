@@ -7,6 +7,9 @@ use super::{player::Player, tiles::Tile};
 fn print_player_board(player: &Player) {
     let c = player.rows.len();
     for (i, row) in player.rows.iter().enumerate() {
+        const PRINT_PATTERN: &str = "[ ]";
+        const EMPTY_PATTERN: &str = "   ";
+        
         let tile_to_color: HashMap<Tile, Color> = HashMap::from([
             (Tile::BLUE,    Color::BrightBlue),
             (Tile::YELLOW,  Color::BrightYellow),
@@ -16,14 +19,14 @@ fn print_player_board(player: &Player) {
         ]);
 
         // Empty padding
-        print!("{}",  "  ".repeat(c - i - 1));
+        print!("{}",  EMPTY_PATTERN.repeat(c - (row.size as usize) - 1));
 
         // Empty tiles
-        print!("{}", "[]".repeat(i + 1 - (row.size as usize)).color(Color::TrueColor { r: 219, g: 147, b: 112 }));
+        print!("{}", PRINT_PATTERN.repeat(i + 1 - (row.capacity as usize)).color(Color::TrueColor { r: 219, g: 147, b: 112 }));
 
         // Filled tiles
         if let Some(tile) = row.tile {
-            print!("{}", "  ".repeat(row.size as usize).on_color(tile_to_color[&tile]));            
+            print!("{}", PRINT_PATTERN.repeat(row.capacity as usize).on_color(tile_to_color[&tile]).bold());            
         }
 
         // Separator
@@ -32,9 +35,9 @@ fn print_player_board(player: &Player) {
         // Wall tiles
         for (j, flag) in player.wall[i].iter().enumerate() {
             if *flag {
-                print!("{}", " ".on_color(tile_to_color[&WALL_PATTERN[i][j]]));
+                print!("{}", PRINT_PATTERN.on_color(tile_to_color[&WALL_PATTERN[i][j]]).bold());
             } else {
-                print!("{}", "[]".color(tile_to_color[&WALL_PATTERN[i][j]]));
+                print!("{}", PRINT_PATTERN.color(tile_to_color[&WALL_PATTERN[i][j]]));
             }
         }
 

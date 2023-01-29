@@ -13,7 +13,7 @@ impl Default for Player {
     fn default() -> Self {
         Self {
             floor_position: 0,
-            rows: (0..5).map(|i| PatternRow { capacity: i, size: 0, tile: None}).collect(),
+            rows: (0..5).map(|i| PatternRow { capacity: 0, size: i, tile: None}).collect(),
             wall: vec![vec![false; 5]; 5],
             score: 0,
         }
