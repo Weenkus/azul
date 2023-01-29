@@ -1,3 +1,4 @@
+use crate::game::actions::available_actions;
 use crate::game::tiles::*;
 use crate::game::factory::*;
 use crate::game::player::*;
@@ -76,6 +77,7 @@ pub fn is_round_end(game_state: &GameState) -> bool {
 pub fn update_ui(game_state: &GameState) {
     println!("Updating UI");
     println!("Factory: {:?}", game_state.factory_floor);
+    println!("Available actions: {:?}", available_actions(game_state).len());
     println!();
 
     print_player_boards(&game_state.players);

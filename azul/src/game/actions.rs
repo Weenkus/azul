@@ -1,7 +1,8 @@
 use super::gameloop::GameState;
+use super::tiles::Tile;
 
 use std::iter;
-use itertools::iproduct;
+use itertools::{iproduct, Itertools};
 
 
 #[derive(Debug, Clone, Copy)]
@@ -10,7 +11,8 @@ pub struct TakeTileAction {
     /// If the player takes from the center of the factory floor,
     /// the display_index will be None, otherwise if it takes from
     /// the display, the display_index will be set
-    display_index: Option<i32>
+    display_index: Option<i32>,
+    tile: Tile,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -40,11 +42,19 @@ pub fn available_take_actions(game_state: &GameState) -> Vec<TakeTileAction> {
     iter::once(game_state.factory_floor.center.clone())
         .chain(game_state.factory_floor.displays.clone())
         .enumerate()
-        .map(|(i, tile_set)| {
-            if tile_set.is_empty() {
-                return TakeTileAction{ display_index: Some(i as i32) };
+        .map(|(i, tile_set)| iproduct!(iter::once((i, tile_set.is_empty())), tile_set.available_colors()))
+        .flatten()
+        .map(|((i, is_empty), tile)| {
+            if is_empty {
+                return TakeTileAction{ 
+                    display_index: Some(i as i32),
+                    tile: tile,
+                };
             } else {
-                return TakeTileAction{ display_index: None };
+                return TakeTileAction{ 
+                    display_index: None,
+                    tile: tile,
+                };
             }
         })
         .collect::<Vec<TakeTileAction>>()
