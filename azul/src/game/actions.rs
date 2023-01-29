@@ -45,16 +45,9 @@ pub fn available_take_actions(game_state: &GameState) -> Vec<TakeTileAction> {
         .map(|(i, tile_set)| iproduct!(iter::once((i, tile_set.is_empty())), tile_set.available_colors()))
         .flatten()
         .map(|((i, is_empty), tile)| {
-            if is_empty {
-                return TakeTileAction{ 
-                    display_index: Some(i as i32),
-                    tile: tile,
-                };
-            } else {
-                return TakeTileAction{ 
-                    display_index: None,
-                    tile: tile,
-                };
+            TakeTileAction{ 
+                display_index: if is_empty {None} else {Some(i as i32)},
+                tile: tile,
             }
         })
         .collect::<Vec<TakeTileAction>>()
